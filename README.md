@@ -187,6 +187,8 @@ Nessa aplicação você deverá **obrigatoriamente** utilizar o seguinte formato
 
 É importante respeitar esse formato para que o avaliador funcione corretamente. Você pode adicionar novos campos ao seu estado global, mas essa estrutura básica deve se manter. Por exemplo, você pode adicionar uma propriedade `isFetching` no seu estado. Mas você **não** pode salvar as despesas em uma chave diferente de `wallet.expenses`.
 
+Outra coisa importante: devido a estrutura que o avaliador utiliza para realizar os testes, é **necessário** que o seu <Provider /> e o seu <BrowserRouter /> estejam no arquivo `index.js` e **não** no `<App />`.
+
 ### Página de Login
 
 Crie uma página para que a pessoa usuária se identifique, com email e senha. Esta página deve ser a página inicial de seu aplicativo.
