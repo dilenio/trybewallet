@@ -28,7 +28,7 @@ class Login extends React.Component {
 
   isLogin() {
     const { email, password } = this.state;
-    if ( this.isEmail(email) && this.isPassword(password)) {
+    if(this.isEmail(email) && this.isPassword(password)) {
       this.setState({ loginDisable: false });
     } else {
       this.setState({ loginDisable: true });
@@ -40,8 +40,8 @@ class Login extends React.Component {
   }
 
   handleLogin() {
-    console.log(this.props, this.state)
-    this.props.history.push('/carteira');
+    const { history } = this.props;
+    history.push('/carteira');
   }
 
   render() {
@@ -73,7 +73,7 @@ class Login extends React.Component {
             onChange={ this.handlePassword }
           />
         </label>
-        <button 
+        <button
           id="btnlogin"
           type="button"
           disabled={ loginDisable }
@@ -98,9 +98,8 @@ const mapStateToProps = (state) => ({
 });
 
 Login.propTypes = {
-  loginEmail: PropTypes.func,
-  email: PropTypes.string,
-  history: PropTypes.shape(),
+  loginEmail: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

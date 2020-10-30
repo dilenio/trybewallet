@@ -5,10 +5,9 @@ const INITIAL_STATE = {
 };
 
 const user = (state = INITIAL_STATE, action) => {
-  console.log(action)
   switch (action.type) {
   case 'SIGN_IN':
-    return {...state, email: action.email};
+    return { ...state, email: action.email };
   default:
     return state;
   }
