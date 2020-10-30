@@ -1,6 +1,6 @@
-const loginAction = (payload) => ({
+const loginAction = (email) => ({
   type: 'SIGN_IN',
-  payload,
+  email,
 });
 
 export default loginAction;

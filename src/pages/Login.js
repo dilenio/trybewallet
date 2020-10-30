@@ -22,14 +22,13 @@ class Login extends React.Component {
   }
 
   isPassword(password) {
-    return password.length >= 6 ? true : false;
+    const six = 6;
+    return password.length >= six;
   }
 
   isLogin() {
-    if (
-      this.isEmail(this.state.email) &&
-      this.isPassword(this.state.password)
-    ) {
+    const { email, password } = this.state;
+    if ( this.isEmail(email) && this.isPassword(password)) {
       this.setState({ loginDisable: false });
     } else {
       this.setState({ loginDisable: true });
@@ -37,15 +36,11 @@ class Login extends React.Component {
   }
 
   handlePassword(event) {
-    this.setState(
-      {
-        password: event.target.value,
-      },
-      () => this.isLogin()
-    );
+    this.setState({ password: event.target.value }, () => this.isLogin());
   }
 
-  handleLogin(props) {
+  handleLogin() {
+    console.log(this.props, this.state)
     this.props.history.push('/carteira');
   }
 
@@ -55,33 +50,37 @@ class Login extends React.Component {
     return (
       <div>
         <h1>Login</h1>
-        <label>
+        <label htmlFor="email">
           email
           <input
+            name="email"
             type="text"
             data-testid="email-input"
-            onChange={(e) => {
+            value={ email }
+            onChange={ (e) => {
               this.setState({ email: e.target.value });
               this.isLogin();
-            }}
+            } }
           />
         </label>
-        <label>
+        <label htmlFor="password">
           password
           <input
+            name="password"
             type="password"
             data-testid="password-input"
-            onChange={this.handlePassword}
+            value={ password }
+            onChange={ this.handlePassword }
           />
         </label>
-        <button
+        <button 
           id="btnlogin"
           type="button"
-          disabled={loginDisable}
-          onClick={() => {
-            this.props.loginEmail(this.state);
-            this.handleLogin(this.props);
-          }}
+          disabled={ loginDisable }
+          onClick={ () => {
+            loginEmail(email);
+            this.handleLogin();
+          } }
         >
           Entrar
         </button>
@@ -99,7 +98,9 @@ const mapStateToProps = (state) => ({
 });
 
 Login.propTypes = {
-  email: PropTypes.string.isRequired,
+  loginEmail: PropTypes.func,
+  email: PropTypes.string,
+  history: PropTypes.shape(),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
