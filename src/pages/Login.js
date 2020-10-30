@@ -28,7 +28,7 @@ class Login extends React.Component {
 
   isLogin() {
     const { email, password } = this.state;
-    if(this.isEmail(email) && this.isPassword(password)) {
+    if (this.isEmail(email) && this.isPassword(password)) {
       this.setState({ loginDisable: false });
     } else {
       this.setState({ loginDisable: true });
