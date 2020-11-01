@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import loginAction from '../actions';
+import '../css/login.css';
+import logo from '../assets/logo.svg';
 
 class Login extends React.Component {
   constructor() {
@@ -48,42 +50,47 @@ class Login extends React.Component {
     const { email, password, loginDisable } = this.state;
     const { loginEmail } = this.props;
     return (
-      <div>
-        <h1>Login</h1>
-        <label htmlFor="email">
-          email
-          <input
-            name="email"
-            type="text"
-            data-testid="email-input"
-            value={ email }
-            onChange={ (e) => {
-              this.setState({ email: e.target.value });
-              this.isLogin();
-            } }
-          />
-        </label>
-        <label htmlFor="password">
-          password
-          <input
-            name="password"
-            type="password"
-            data-testid="password-input"
-            value={ password }
-            onChange={ this.handlePassword }
-          />
-        </label>
-        <button
-          id="btnlogin"
-          type="button"
-          disabled={ loginDisable }
-          onClick={ () => {
-            loginEmail(email);
-            this.handleLogin();
-          } }
-        >
-          Entrar
-        </button>
+      <div className="container-login">
+        <div className="boxlogin">
+          <div className="logo">
+            <img src={ logo } alt="Wallet logo" className="icon" />
+          </div>
+          <div className="access">
+            <input
+              className="input"
+              name="email"
+              type="text"
+              data-testid="email-input"
+              placeholder="E-mail"
+              value={ email }
+              onChange={ (e) => {
+                this.setState({ email: e.target.value });
+                this.isLogin();
+              } }
+            />
+            <input
+              className="input"
+              name="password"
+              type="password"
+              data-testid="password-input"
+              placeholder="Senha"
+              value={ password }
+              onChange={ this.handlePassword }
+            />
+            <button
+              className="btn"
+              id="btnlogin"
+              type="button"
+              disabled={ loginDisable }
+              onClick={ () => {
+                loginEmail(email);
+                this.handleLogin();
+              } }
+            >
+              Entrar
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
