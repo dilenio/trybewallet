@@ -78,12 +78,11 @@ class Expenses extends React.Component {
             data-testid="currency-input"
             onChange={ this.handleInputs }
           >
-          { filterCurrencies.map((currency) => (
+            { filterCurrencies.map((currency) => (
               <option key={ currency } data-testid={ currency }>
                 { currency }
               </option>
-            ))
-          }
+            )) }
           </select>
           <select
             name="method"
