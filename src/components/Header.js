@@ -14,12 +14,9 @@ class Header extends React.Component {
             { email }
           </div>
           <div>
-            <p>
-              Total:
-              { ' ' }
-              <span data-testid="total-field">{ total || 0 }</span>
-              <span data-testid="header-currency-field"> BRL</span>
-            </p>
+            <span>Total: </span>
+            <span data-testid="total-field" value="0">{ total }</span>
+            <span data-testid="header-currency-field"> BRL</span>
           </div>
         </div>
       </header>
@@ -34,7 +31,7 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  total: PropTypes.number,
+  total: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Header);
