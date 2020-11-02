@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import logo from '../assets/logo.svg';
 
 class Header extends React.Component {
-  render  () {
+  render() {
     const { email, total } = this.props;
     return (
       <header>
@@ -15,8 +15,7 @@ class Header extends React.Component {
           </div>
           <div>
             <p>
-              Total:
-              { ' ' }
+              { `Total: ` }
               <span data-testid="total-field">{ total || 0 }</span>
               <span data-testid="header-currency-field"> BRL</span>
             </p>
@@ -34,7 +33,6 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  total: PropTypes.number,
 };
 
 export default connect(mapStateToProps)(Header);

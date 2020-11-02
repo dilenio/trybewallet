@@ -11,7 +11,10 @@ class Wallet extends React.Component {
       <div className="container-wallet">
         <Header />
         <nav>
-          <div>navbar { email }</div>
+          <div>
+            navbar
+            { email }
+          </div>
         </nav>
         <main>
           <div>main</div>
