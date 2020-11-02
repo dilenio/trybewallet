@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 import logo from '../assets/logo.svg';
 
 class Header extends React.Component {
-  render () {
-    console.log(this.props)
-    const { email } = this.props;
-    const { total } = this.props.wallet;
+  render  () {
+    const { email, total } = this.props;
     return (
       <header>
         <img src={ logo } alt="Wallet logo" className="logo-wallet" />
@@ -17,8 +15,9 @@ class Header extends React.Component {
           </div>
           <div>
             <p>
-              Total:{ ' ' }
-              <span data-testid="total-field">{ (total) ? total : 0 }</span>
+              Total:
+              { ' ' }
+              <span data-testid="total-field">{ total || 0 }</span>
               <span data-testid="header-currency-field"> BRL</span>
             </p>
           </div>
@@ -30,7 +29,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  wallet: state.wallet,
+  total: state.wallet.total,
 });
 
 Header.propTypes = {

@@ -6,11 +6,12 @@ import '../css/wallet.css';
 
 class Wallet extends React.Component {
   render() {
+    const { email } = this.props;
     return (
       <div className="container-wallet">
         <Header />
         <nav>
-          <div>navbar</div>
+          <div>navbar { email }</div>
         </nav>
         <main>
           <div>main</div>
