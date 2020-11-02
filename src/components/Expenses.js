@@ -5,7 +5,7 @@ import '../css/expenses.css';
 
 class Expenses extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       expenses: {
@@ -17,7 +17,7 @@ class Expenses extends React.Component {
         exchangeRates: {},
       },
       total: 0,
-    }
+    };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleInputs = this.handleInputs.bind(this);
@@ -60,34 +60,35 @@ class Expenses extends React.Component {
           <input
             type="number"
             name="value"
-            value={value}
+            value={ value }
             placeholder="Valor"
             data-testid="value-input"
-            onChange={this.handleInputs}
+            onChange={ this.handleInputs }
           />
           <input
             type="text"
             name="description"
-            value={description}
+            value={ description }
             placeholder="Descrição"
             data-testid="description-input"
-            onChange={this.handleInputs}
+            onChange={ this.handleInputs }
           />
           <select
             name="currency"
             data-testid="currency-input"
-            onChange={this.handleInputs}
+            onChange={ this.handleInputs }
           >
-          {filterCurrencies.map((currency) => (
-            <option key={currency} data-testid={currency}>
-              {currency}
-            </option>
-          ))};
+          { filterCurrencies.map((currency) => (
+              <option key={ currency } data-testid={ currency }>
+                { currency }
+              </option>
+            ))
+          }
           </select>
           <select
             name="method"
             data-testid="method-input"
-            onChange={this.handleInputs}
+            onChange={ this.handleInputs }
           >
             <option>Dinheiro</option>
             <option>Cartão de crédito</option>
@@ -96,7 +97,7 @@ class Expenses extends React.Component {
           <select
             name="tag"
             data-testid="tag-input"
-            onChange={this.handleInputs}
+            onChange={ this.handleInputs }
           >
             <option>Alimentação</option>
             <option>Lazer</option>
@@ -106,7 +107,7 @@ class Expenses extends React.Component {
           </select>
           <button
             type="button"
-            onClick={this.handleClick}
+            onClick={ this.handleClick }
           >
             Adicionar despesa
           </button>
@@ -114,7 +115,7 @@ class Expenses extends React.Component {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
@@ -124,5 +125,11 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrency()),
   addExpenseRedux: (data) => dispatch(addExpense(data)),
 });
+
+Expenses.propTypes = {
+  currencies: PropTypes.objectOf.isRequired,
+  addExpenseRedux: PropTypes.func.isRequired,
+  fetchCurrencies: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Expenses);

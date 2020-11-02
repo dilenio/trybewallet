@@ -13,10 +13,8 @@ export const addExpense = (expense) => ({
   expense,
 });
 
-export const fetchCurrency = () => {
-  return async (dispatch) => {
-    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const data = await response.json();
-    dispatch(addCurrency(data));
-  };
-}
+export const fetchCurrency = () => async (dispatch) => {
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  dispatch(addCurrency(data));
+};
