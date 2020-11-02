@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Expenses from '../components/Expenses';
 import '../css/wallet.css';
 
 class Wallet extends React.Component {
@@ -10,12 +11,11 @@ class Wallet extends React.Component {
     return (
       <div className="container-wallet">
         <Header />
-        <nav>
-          <div>
-            navbar
-            { email }
-          </div>
-        </nav>
+        <Expenses />
+        <div>
+          navbar
+          { email }
+        </div>
         <main>
           <div>main</div>
         </main>

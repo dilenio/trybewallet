@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../assets/logo.svg';
@@ -8,7 +9,9 @@ class Header extends React.Component {
     const { email, total } = this.props;
     return (
       <header>
-        <img src={ logo } alt="Wallet logo" className="logo-wallet" />
+        <Link to="/">
+          <img src={ logo } alt="Wallet logo" className="logo-wallet" />
+        </Link>
         <div>
           <div data-testid="email-field">
             { email }
