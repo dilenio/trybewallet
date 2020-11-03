@@ -13,6 +13,11 @@ export const addExpense = (expense) => ({
   expense,
 });
 
+export const deleteExpense = (expense) => ({
+  type: 'DELETE_EXPENSE',
+  expense,
+});
+
 export const fetchCurrency = () => async (dispatch) => {
   const response = await fetch('https://economia.awesomeapi.com.br/json/all');
   const data = await response.json();

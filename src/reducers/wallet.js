@@ -1,4 +1,3 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
@@ -23,6 +22,18 @@ const wallet = (state = INITIAL_STATE, action) => {
       ],
       ...state.total,
       total: action.expense.total,
+    };
+  case 'DELETE_EXPENSE':
+    const filterExpenses = state.expenses.filter(
+      (expense) => expense.id !== action.expense.id
+    );
+    const total = filterExpenses.reduce(
+      (acc, curr) => acc + (curr.value * curr.exchangeRates[curr.currency].ask), 0
+    );
+    return {
+      ...state,
+      expenses: [ ...filterExpenses ],
+      total,
     };
   default:
     return state;

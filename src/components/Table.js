@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FaRegEdit, FaEraser } from 'react-icons/fa';
+import { deleteExpense } from '../actions';
 
 class Table extends React.Component {
   renderExpense(expense) {
     const { id, description, tag, method, value, currency, exchangeRates } = expense;
-
+    const { deleteExpenseDispatch } = this.props;
     return (
       <tr id={ id }>
         <td>{ description }</td>
@@ -29,6 +30,7 @@ class Table extends React.Component {
             type="button"
             data-testid="delete-btn"
             className="btn-table btn-eraser"
+            onClick={ () => deleteExpenseDispatch(expense) }
           >
             <FaEraser />
           </button>
@@ -68,8 +70,13 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpenseDispatch: (expense) => dispatch(deleteExpense(expense)),
+});
+
 Table.propTypes = {
   expenses: PropTypes.objectOf().isRequired,
+  deleteExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
