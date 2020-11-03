@@ -23,18 +23,19 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state.total,
       total: action.expense.total,
     };
-  case 'DELETE_EXPENSE':
+  case 'DELETE_EXPENSE': {
     const filterExpenses = state.expenses.filter(
-      (expense) => expense.id !== action.expense.id
+      (expense) => expense.id !== action.expense.id,
     );
     const total = filterExpenses.reduce(
-      (acc, curr) => acc + (curr.value * curr.exchangeRates[curr.currency].ask), 0
+      (acc, curr) => acc + (curr.value * curr.exchangeRates[curr.currency].ask), 0,
     );
     return {
       ...state,
-      expenses: [ ...filterExpenses ],
+      expenses: [...filterExpenses],
       total,
     };
+  }
   default:
     return state;
   }

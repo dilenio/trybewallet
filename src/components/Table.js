@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Table.propTypes = {
   expenses: PropTypes.objectOf().isRequired,
-  deleteExpense: PropTypes.func.isRequired,
+  deleteExpenseDispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
