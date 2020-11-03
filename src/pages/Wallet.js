@@ -1,27 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Expenses from '../components/Expenses';
+import Table from '../components/Table';
 import '../css/wallet.css';
 
 class Wallet extends React.Component {
   render() {
-    const { email } = this.props;
     return (
       <div className="container-wallet">
         <Header />
         <Expenses />
-        <div>
-          navbar
-          { email }
-        </div>
-        <main>
-          <div>main</div>
-        </main>
-        <footer>
-          <div>
-            footer
+        <Table />
+        <footer className="container-footer">
+          <div className="footer-text">
+            Criado por Dilenio Enderle - Projeto Trybe Wallet
           </div>
         </footer>
       </div>
@@ -29,12 +21,4 @@ class Wallet extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  email: state.user.email,
-});
-
-Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
-};
-
-export default connect(mapStateToProps)(Wallet);
+export default Wallet;

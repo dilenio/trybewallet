@@ -76,3 +76,75 @@ input:focus {
 .btn:focus {
   outline: 0;
 }
+
+.container-table {
+  display: flex;
+  justify-content: center;
+  background-color: #17100a;
+  color: white;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  display: flex;
+  /* border: 1px solid #A5A5A5; */
+  font-size: 14px;
+  display: flex;
+  /* justify-content: space-between; */
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+}
+
+tr:nth-child(odd) {
+  background-color: #88786a;
+  color: black;
+}
+
+tr:nth-child(even) {
+  background-color: #c5b5a9;
+  color: black;
+}
+
+th {
+  border-right: 1px solid #3e3e3e;
+  width: 100%;
+  padding: 10px;
+  height: 20px;
+  background-color: #17100a;
+  color: white;
+}
+
+td {
+  width: 100%;
+  padding: 10px;
+}
+
+.btn-table {
+  margin: 0 10px;
+  border-radius: 6px;
+  border: 0;
+  padding: 5px 10px;
+}
+
+.btn-edit {
+  background-color: #22ABC9;
+}
+
+.btn-eraser {
+  background-color: #960505;
+}
+
+.container-footer {
+  background-color: #302d29;
+  height: 50px;
+}
+
+.footer-text {
+  text-align: center;
+  padding: 15px 0;
+}

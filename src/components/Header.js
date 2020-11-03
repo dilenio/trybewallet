@@ -13,12 +13,12 @@ class Header extends React.Component {
           <img src={ logo } alt="Wallet logo" className="logo-wallet" />
         </Link>
         <div>
-          <div data-testid="email-field">
+          <div data-testid="email-field" className="email">
             { email }
           </div>
           <div>
             <span>Total: </span>
-            <span data-testid="total-field" value="0">{ total }</span>
+            <span data-testid="total-field" value="0" className="total">{ total }</span>
             <span data-testid="header-currency-field"> BRL</span>
           </div>
         </div>

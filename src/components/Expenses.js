@@ -46,7 +46,7 @@ class Expenses extends React.Component {
     this.setState((state) => ({
       ...state,
       expenses: { ...state.expenses, exchangeRates: { ...currencies } },
-      total: sum,
+      total: Number(sum.toFixed(2)),
     }), () => addExpenseRedux(this.state));
   }
 
@@ -64,6 +64,7 @@ class Expenses extends React.Component {
             value={ value }
             placeholder="Valor"
             data-testid="value-input"
+            className="expense-input"
             onChange={ this.handleInputs }
           />
           <input
@@ -72,11 +73,13 @@ class Expenses extends React.Component {
             value={ description }
             placeholder="Descrição"
             data-testid="description-input"
+            className="expense-input"
             onChange={ this.handleInputs }
           />
           <select
             name="currency"
             data-testid="currency-input"
+            className="expense-input"
             onChange={ this.handleInputs }
           >
             { filterCurrencies.map((currency) => (
@@ -88,6 +91,7 @@ class Expenses extends React.Component {
           <select
             name="method"
             data-testid="method-input"
+            className="expense-input"
             onChange={ this.handleInputs }
           >
             <option>Dinheiro</option>
@@ -97,6 +101,7 @@ class Expenses extends React.Component {
           <select
             name="tag"
             data-testid="tag-input"
+            className="expense-input"
             onChange={ this.handleInputs }
           >
             <option>Alimentação</option>
@@ -107,6 +112,7 @@ class Expenses extends React.Component {
           </select>
           <button
             type="button"
+            className="btn-expense"
             onClick={ this.handleClick }
           >
             Adicionar despesa
