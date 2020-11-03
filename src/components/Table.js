@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FaRegEdit, FaEraser } from "react-icons/fa";
+import { FaRegEdit, FaEraser } from 'react-icons/fa';
 
 class Table extends React.Component {
   renderExpense(expense) {
@@ -15,8 +15,7 @@ class Table extends React.Component {
         <td>{ value }</td>
         <td>{ exchangeRates[currency].name }</td>
         <td>{ parseFloat(exchangeRates[currency].ask).toFixed(2) }</td>
-        <td>{ parseFloat(exchangeRates[currency]
-          .ask * value).toFixed(2) }</td>
+        <td>{ parseFloat(exchangeRates[currency].ask * value).toFixed(2) }</td>
         <td>Real</td>
         <td>
           <button
