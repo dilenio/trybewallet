@@ -31,13 +31,15 @@ class Expenses extends React.Component {
     !editModeProps && fetchCurrencies();
   }
 
-  getDataToEdit(expenses) {
+  getDataToEdit(expenseToEdit) {
     const { editModeExpenseDispatch } = this.props;
-    this.setState({
-      expenses,
-      edit: true,
-    });
-    editModeExpenseDispatch(false, {});
+    if (expenseToEdit && Object.keys(expenseToEdit).length > 0) {
+      this.setState({
+        expenses: expenseToEdit,
+        edit: true,
+      });
+      editModeExpenseDispatch(false, {});
+    }
   }
 
   handleInputs(event) {
@@ -86,7 +88,8 @@ class Expenses extends React.Component {
     const { getDataToEdit } = this;
     const filterCurrencies = Object.keys(currencies)
       .filter((currElement) => currElement !== 'USDT');
-    (expenseToEdit && Object.keys(expenseToEdit).length > 0) && getDataToEdit(expenseToEdit);
+    // (expenseToEdit && Object.keys(expenseToEdit).length > 0) && getDataToEdit(expenseToEdit);
+    getDataToEdit(expenseToEdit);
     return (
       <div className={ edit ? 'container-edit' : 'container-expenses' }>
         <form>
