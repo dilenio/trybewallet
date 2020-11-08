@@ -1,7 +1,9 @@
 const INITIAL_STATE = {
-  currencies: [],
+  currencies: {},
   expenses: [],
   total: 0,
+  editMode: false,
+  expenseToEdit: {},
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -35,6 +37,27 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: [...filterExpenses],
       total,
     };
+  }
+  case 'EDIT_EXPENSE': {
+    const expensesEdited = [...state.expenses];
+    expensesEdited.splice(action.expense.expenses.id, 1, action.expense.expenses);
+    const total = expensesEdited.reduce(
+      (acc, curr) => acc + (curr.value * curr.exchangeRates[curr.currency].ask), 0,
+    );
+    return {
+      ...state,
+      expenses: [...expensesEdited],
+      total,
+      editMode: false,
+      expenseToEdit: {},
+    };
+  }
+  case 'EDIT_MODE': {
+    return {
+      ...state,
+      editMode: action.editMode,
+      expenseToEdit: action.expense,
+    }
   }
   default:
     return state;

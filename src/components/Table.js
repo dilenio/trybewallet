@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FaRegEdit, FaEraser } from 'react-icons/fa';
-import { deleteExpense } from '../actions';
+import { deleteExpense, editMode } from '../actions';
 
 class Table extends React.Component {
   renderExpense(expense) {
     const { id, description, tag, method, value, currency, exchangeRates } = expense;
-    const { deleteExpenseDispatch } = this.props;
+    const { deleteExpenseDispatch, editModeExpenseDispatch } = this.props;
     return (
-      <tr id={ id }>
+      <tr id={ id } key={ id }>
         <td>{ description }</td>
         <td>{ tag }</td>
         <td>{ method }</td>
@@ -23,6 +23,7 @@ class Table extends React.Component {
             type="button"
             data-testid="edit-btn"
             className="btn-table btn-edit"
+            onClick={ () => editModeExpenseDispatch(true, expense) }
           >
             <FaRegEdit />
           </button>
@@ -72,11 +73,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenseDispatch: (expense) => dispatch(deleteExpense(expense)),
+  editModeExpenseDispatch: (edit, expense) => dispatch(editMode(edit, expense)),
 });
 
 Table.propTypes = {
-  expenses: PropTypes.objectOf().isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
   deleteExpenseDispatch: PropTypes.func.isRequired,
+  editModeExpenseDispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

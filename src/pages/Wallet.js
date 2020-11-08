@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Expenses from '../components/Expenses';
 import Table from '../components/Table';
-import '../css/wallet.css';
+import Footer from '../components/Footer';
 
 class Wallet extends React.Component {
   render() {
@@ -11,11 +11,7 @@ class Wallet extends React.Component {
         <Header />
         <Expenses />
         <Table />
-        <footer className="container-footer">
-          <div className="footer-text">
-            Criado por Dilenio Enderle - Projeto Trybe Wallet
-          </div>
-        </footer>
+        <Footer />
       </div>
     );
   }

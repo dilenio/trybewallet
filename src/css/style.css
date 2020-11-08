@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;900&display=swap');
+
+body {
+  background-color: #CFCAC6;
+}
+
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.boxlogin {
+  justify-content: center;
+  background: #E0E0E0;
+  border: 1px solid #A5A5A5;
+  box-sizing: border-box;
+  border-radius: 6px;
+  width: 380px;
+  height: 425px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  left: 53px;
+  top: 0px;
+  margin-right: 15px;
+}
+
+.access {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.input {
+  background: #FFFFFF;
+  border: 1px solid #A5A5A5;
+  box-sizing: border-box;
+  border-radius: 6px;
+  width: 305px;
+  height: 47px;
+  margin-top: 10px;
+  padding-left: 15px;
+  font-size: 18px;
+  color: #484848;
+}
+
+input:focus {
+  border: 1px solid #3EA818;
+  outline: 0;
+}
+
+.btn {
+  width: 305px;
+  height: 47px;
+  background: #3EA818;
+  border-radius: 6px;
+  color: white;
+  font-size: 18px;
+  border: 0;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background: #35a30d;
+}
+
+.btn:disabled {
+  background: #CCCCCC;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.container-table {
+  display: flex;
+  justify-content: center;
+  background-color: #887f77;
+  color: white;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  display: flex;
+  /* border: 1px solid #A5A5A5; */
+  font-size: 14px;
+  display: flex;
+  /* justify-content: space-between; */
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+}
+
+tr:nth-child(odd) {
+  background-color: #f0e9e3;
+  color: black;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff;
+  color: black;
+}
+
+th {
+  border-right: 1px solid #a59a91;
+  width: 100%;
+  padding: 10px;
+  height: 20px;
+  background-color: #887f77;
+  color: white;
+}
+
+td {
+  width: 100%;
+  padding: 10px;
+}
+
+.btn-table {
+  margin: 0 10px;
+  border-radius: 6px;
+  border: 0;
+  padding: 5px 10px;
+}
+
+.btn-edit {
+  background-color: #3273dc;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #2a6ad1;
+}
+
+.btn-eraser {
+  background-color: #f14668;
+  color: white;
+}
+
+.btn-eraser:hover {
+  background-color: #ee355a
+}
+
+.container-footer {
+  background-color: #CFCAC6;
+  height: 50px;
+}
+
+.footer-text {
+  text-align: center;
+  color: black;
+  font-size: 12px;
+  padding: 15px 0;
+}
+
+.container-wallet {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #CFCAC6;
+}
+
+.email {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3c3c3c;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 2px solid #00d1b2;
+  margin: 6px;
+}
+
+.total {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 900;
+  color: black;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 2px solid #f14668;
+  margin: 6px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #414141;
+  color: white;
+}
+
+main {
+  background-color: #CFCAC6;
+}
+
+footer {
+  background-color: #414141;
+  color: white;
+}
+
+.logo-wallet {
+  width: 150px;
+  height: 75px;
+  left: 53px;
+  top: 0px;
+  margin-right: 15px;
+}
+
+.container-expenses {
+  display: flex;
+  flex-direction: column;
+  background-color: #32c0ab;
+}
+
+.container-edit {
+  display: flex;
+  flex-direction: column;
+  background-color: #386080;
+}
+
+.expense-input {
+  background: #FFFFFF;
+  border: 1px solid #A5A5A5;
+  box-sizing: border-box;
+  border-radius: 6px;
+  width: 240px;
+  height: 47px;
+  margin-top: 10px;
+  padding-left: 15px;
+  font-size: 18px;
+  color: #484848;
+  margin: 25px 10px;
+}
+
+.expense-input:focus {
+  border: 1px solid #3EA818;
+  outline: 0;
+}
+
+.btn-expense {
+  width: 200px;
+  height: 47px;
+  background: #3273dc;
+  border-radius: 6px;
+  color: white;
+  font-size: 18px;
+  border: 0;
+  margin: 30px 10px;
+}
+
+.btn-expense:disabled {
+  background: #CCCCCC;
+}
+
+.btn-expense:focus {
+  outline: 0;
+}
+
+.btn-expense:hover {
+  background: #2a6ad1;
+}

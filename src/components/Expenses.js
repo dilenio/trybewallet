@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrency, addExpense } from '../actions';
-import '../css/expenses.css';
+import { fetchCurrency, addExpense, editMode, editExpense } from '../actions';
 
 class Expenses extends React.Component {
   constructor(props) {
@@ -18,15 +17,27 @@ class Expenses extends React.Component {
         exchangeRates: {},
       },
       total: 0,
+      edit: false,
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleInputs = this.handleInputs.bind(this);
+    this.clearState = this.clearState.bind(this);
+    this.getDataToEdit = this.getDataToEdit.bind(this);
+  }
+
+  getDataToEdit(expenses) {
+    const { editModeExpenseDispatch } = this.props;
+    this.setState({
+      expenses,
+      edit: true,
+    });
+    editModeExpenseDispatch(false, {});
   }
 
   componentDidMount() {
-    const { fetchCurrencies } = this.props;
-    fetchCurrencies();
+    const { fetchCurrencies, editMode } = this.props;
+    !editMode && fetchCurrencies();
   }
 
   handleInputs(event) {
@@ -37,26 +48,49 @@ class Expenses extends React.Component {
     }));
   }
 
+  clearState() {
+    this.setState({
+      expenses: {
+        value: 0,
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+        exchangeRates: {},
+      },
+      edit: false,
+    });
+  }
+
   async handleClick() {
-    const { fetchCurrencies } = this.props;
-    await fetchCurrencies();
-    const { addExpenseRedux, currencies } = this.props;
-    const { total, expenses: { value, currency } } = this.state;
-    const sum = total + (value * currencies[currency].ask);
-    this.setState((state) => ({
-      ...state,
-      expenses: { ...state.expenses, exchangeRates: { ...currencies } },
-      total: Number(sum.toFixed(2)),
-    }), () => addExpenseRedux(this.state));
+    const { fetchCurrencies, editExpenseRedux } = this.props;
+    const { edit, total, expenses: { value, currency } } = this.state;
+    if (edit) {
+      editExpenseRedux(this.state);
+    } else {
+      await fetchCurrencies();
+      const { addExpenseRedux, currencies } = this.props;
+      const sum = total + (value * currencies[currency].ask);
+      this.setState((state) => ({
+        ...state,
+        expenses: { ...state.expenses, exchangeRates: { ...currencies } },
+        total: Number(sum.toFixed(2)),
+      }), () => addExpenseRedux(this.state));
+    }
+    this.clearState()
   }
 
   render() {
-    const { expenses: { value, description } } = this.state;
-    const { currencies } = this.props;
+    const { expenses: { value, description, currency, method, tag }, edit } = this.state;
+    const { currencies, expenseToEdit } = this.props;
+    const { getDataToEdit } = this;
     const filterCurrencies = Object.keys(currencies)
       .filter((currency) => currency !== 'USDT');
+    if (expenseToEdit) {
+      (Object.keys(expenseToEdit).length > 0) && getDataToEdit(expenseToEdit);
+    }
     return (
-      <div className="container-expenses">
+      <div className={ edit ? 'container-edit' : 'container-expenses' }>
         <form>
           <input
             type="number"
@@ -80,10 +114,11 @@ class Expenses extends React.Component {
             name="currency"
             data-testid="currency-input"
             className="expense-input"
+            value={ currency }
             onChange={ this.handleInputs }
           >
             { filterCurrencies.map((currency) => (
-              <option key={ currency } data-testid={ currency }>
+              <option key={ currency } data-testid={ currency } value={ currency }>
                 { currency }
               </option>
             )) }
@@ -92,30 +127,32 @@ class Expenses extends React.Component {
             name="method"
             data-testid="method-input"
             className="expense-input"
+            value={ method }
             onChange={ this.handleInputs }
           >
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
           <select
             name="tag"
             data-testid="tag-input"
             className="expense-input"
+            value={ tag }
             onChange={ this.handleInputs }
           >
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
           <button
             type="button"
             className="btn-expense"
             onClick={ this.handleClick }
           >
-            Adicionar despesa
+            { edit ? 'Editar despesa' : 'Adicionar despesa' }
           </button>
         </form>
       </div>
@@ -125,16 +162,23 @@ class Expenses extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  editMode: state.wallet.editMode,
+  expenseToEdit: state.wallet.expenseToEdit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrency()),
   addExpenseRedux: (data) => dispatch(addExpense(data)),
+  editExpenseRedux: (data) => dispatch(editExpense(data)),
+  editModeExpenseDispatch: (edit, expense) => dispatch(editMode(edit, expense)),
 });
 
 Expenses.propTypes = {
-  currencies: PropTypes.objectOf.isRequired,
+  currencies: PropTypes.object.isRequired,
+  editMode: PropTypes.bool.isRequired,
+  expenseToEdit: PropTypes.object.isRequired,
   addExpenseRedux: PropTypes.func.isRequired,
+  editExpenseRedux: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
 };
 

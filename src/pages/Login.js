@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loginAction } from '../actions';
-import '../css/login.css';
 import logo from '../assets/logo.svg';
 
 class Login extends React.Component {

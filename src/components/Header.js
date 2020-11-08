@@ -16,9 +16,9 @@ class Header extends React.Component {
           <div data-testid="email-field" className="email">
             { email }
           </div>
-          <div>
+          <div className="total">
             <span>Total: </span>
-            <span data-testid="total-field" value="0" className="total">
+            <span data-testid="total-field" value="0">
               { parseFloat(total).toFixed(2) }
             </span>
             <span data-testid="header-currency-field"> BRL</span>
