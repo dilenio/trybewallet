@@ -57,7 +57,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       editMode: action.editMode,
       expenseToEdit: action.expense,
-    }
+    };
   }
   default:
     return state;

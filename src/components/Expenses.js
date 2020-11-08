@@ -26,6 +26,11 @@ class Expenses extends React.Component {
     this.getDataToEdit = this.getDataToEdit.bind(this);
   }
 
+  componentDidMount() {
+    const { fetchCurrencies, editModeProps } = this.props;
+    !editModeProps && fetchCurrencies();
+  }
+
   getDataToEdit(expenses) {
     const { editModeExpenseDispatch } = this.props;
     this.setState({
@@ -33,11 +38,6 @@ class Expenses extends React.Component {
       edit: true,
     });
     editModeExpenseDispatch(false, {});
-  }
-
-  componentDidMount() {
-    const { fetchCurrencies, editMode } = this.props;
-    !editMode && fetchCurrencies();
   }
 
   handleInputs(event) {
@@ -77,7 +77,7 @@ class Expenses extends React.Component {
         total: Number(sum.toFixed(2)),
       }), () => addExpenseRedux(this.state));
     }
-    this.clearState()
+    this.clearState();
   }
 
   render() {
@@ -85,10 +85,8 @@ class Expenses extends React.Component {
     const { currencies, expenseToEdit } = this.props;
     const { getDataToEdit } = this;
     const filterCurrencies = Object.keys(currencies)
-      .filter((currency) => currency !== 'USDT');
-    if (expenseToEdit) {
-      (Object.keys(expenseToEdit).length > 0) && getDataToEdit(expenseToEdit);
-    }
+      .filter((currElement) => currElement !== 'USDT');
+    (expenseToEdit && Object.keys(expenseToEdit).length > 0) && getDataToEdit(expenseToEdit);
     return (
       <div className={ edit ? 'container-edit' : 'container-expenses' }>
         <form>
@@ -117,9 +115,9 @@ class Expenses extends React.Component {
             value={ currency }
             onChange={ this.handleInputs }
           >
-            { filterCurrencies.map((currency) => (
-              <option key={ currency } data-testid={ currency } value={ currency }>
-                { currency }
+            { filterCurrencies.map((curr) => (
+              <option key={ curr } data-testid={ curr } value={ curr }>
+                { curr }
               </option>
             )) }
           </select>
@@ -162,7 +160,7 @@ class Expenses extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  editMode: state.wallet.editMode,
+  editModeProps: state.wallet.editMode,
   expenseToEdit: state.wallet.expenseToEdit,
 });
 
@@ -174,12 +172,13 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Expenses.propTypes = {
-  currencies: PropTypes.object.isRequired,
-  editMode: PropTypes.bool.isRequired,
-  expenseToEdit: PropTypes.object.isRequired,
+  currencies: PropTypes.shape().isRequired,
+  editModeProps: PropTypes.bool.isRequired,
+  expenseToEdit: PropTypes.shape().isRequired,
   addExpenseRedux: PropTypes.func.isRequired,
   editExpenseRedux: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
+  editModeExpenseDispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Expenses);

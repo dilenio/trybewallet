@@ -23,9 +23,9 @@ export const editExpense = (expense) => ({
   expense,
 });
 
-export const editMode = (editMode, expense) => ({
+export const editMode = (editionMode, expense) => ({
   type: 'EDIT_MODE',
-  editMode,
+  editMode: editionMode,
   expense,
 });
 
