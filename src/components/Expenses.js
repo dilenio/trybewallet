@@ -27,12 +27,12 @@ class Expenses extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchCurrencies, editModeProps } = this.props;
-    !editModeProps && fetchCurrencies();
+    const { fetchCurrencies } = this.props;
+    fetchCurrencies();
   }
 
   getDataToEdit(expenseToEdit) {
-    const { editModeExpenseDispatch } = this.props;
+    const { editModeExpenseDispatch, fetchCurrencies } = this.props;
     if (expenseToEdit && Object.keys(expenseToEdit).length > 0) {
       this.setState({
         expenses: expenseToEdit,
