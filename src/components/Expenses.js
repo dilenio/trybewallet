@@ -163,7 +163,6 @@ class Expenses extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  editModeProps: state.wallet.editMode,
   expenseToEdit: state.wallet.expenseToEdit,
 });
 
@@ -176,7 +175,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 Expenses.propTypes = {
   currencies: PropTypes.shape().isRequired,
-  editModeProps: PropTypes.bool.isRequired,
   expenseToEdit: PropTypes.shape().isRequired,
   addExpenseRedux: PropTypes.func.isRequired,
   editExpenseRedux: PropTypes.func.isRequired,
